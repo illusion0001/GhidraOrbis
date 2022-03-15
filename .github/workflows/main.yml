@@ -89,9 +89,17 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: artifacts
-
+      - name: Re-zip artifacts
+        id: zip
+        run: |
+          for artifact in artifacts/*; do
+            7z a ${artifact}.zip "./${artifact}/*"
+            fi
+          done
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ls artifacts #gh release create 1.0${{ GITHUB.RUN_NUMBER }} artifacts/*.zip --target ${{ GITHUB.SHA }} ${{ GITHUB.RUN_NUMBER }} -t 1.0${{ GITHUB.RUN_NUMBER }}
+        run: |
+          ls artifacts 
+          gh release create 1.0${{ GITHUB.RUN_NUMBER }} artifacts/*.zip --target ${{ GITHUB.SHA }} ${{ GITHUB.RUN_NUMBER }} -t 1.0${{ GITHUB.RUN_NUMBER }}
 
