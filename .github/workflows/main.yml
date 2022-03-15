@@ -55,11 +55,11 @@ jobs:
           name: Ghidra-Cpp-Class-Analyzer_${{ matrix.ghidra }}_${{ env.SHORT_SHA }}
           path: Ghidra-Cpp-Class-Analyzer/dist/bin/*
 
-        - name: Upload Ghidra-Cpp-Class-Analyzer release
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          if: github.event_name != 'pull_request'
-          run: gh release create 1.0"${{ GITHUB.RUN_NUMBER }}" Ghidra-Cpp-Class-Analyzer/dist/*.zip --target $GITHUB_SHA -t 1.0"${{ GITHUB.RUN_NUMBER }}"
+      - name: Upload Ghidra-Cpp-Class-Analyzer release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name != 'pull_request'
+        run: gh release create 1.0"${{ GITHUB.RUN_NUMBER }}" Ghidra-Cpp-Class-Analyzer/dist/*.zip --target $GITHUB_SHA -t 1.0"${{ GITHUB.RUN_NUMBER }}"
 
       - name: Cleanup
         run: rm -rf Ghidra-Cpp-Class-Analyzer
