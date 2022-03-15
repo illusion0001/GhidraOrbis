@@ -90,15 +90,16 @@ jobs:
         with:
           path: artifacts
       - name: Re-zip artifacts
-        id: zip
         run: |
+          mkdir zip
           for artifact in artifacts/*; do
-            7z a ${artifact}.zip "./${artifact}/*"
+            7z a ../zip/${artifact}.zip "./${artifact}/*"
           done
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ls artifacts 
-          gh release create 1.0${{ GITHUB.RUN_NUMBER }} artifacts/*.zip --target ${{ GITHUB.SHA }} ${{ GITHUB.RUN_NUMBER }} -t 1.0${{ GITHUB.RUN_NUMBER }}
+          ls artifacts
+          ls zip
+          gh release create 1.0${{ GITHUB.RUN_NUMBER }} artifacts/zip/*.zip --target ${{ GITHUB.SHA }} ${{ GITHUB.RUN_NUMBER }} -t 1.0${{ GITHUB.RUN_NUMBER }}
 
