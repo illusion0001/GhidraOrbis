@@ -77,9 +77,9 @@ jobs:
           path: GhidraOrbis_dist/*
 
   release:
-    if: |
-      github.event.action != 'pull_request' &&
-      github.repository == 'astrelsky/GhidraOrbis'
+    #if: |
+      #github.event.action != 'pull_request' &&
+      #github.repository == 'astrelsky/GhidraOrbis'
     needs: build_extensions
     runs-on: ubuntu-latest
     steps:
