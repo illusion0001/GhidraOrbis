@@ -97,10 +97,5 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          mkdir zip
-          ls artifacts
-          cp artifacts/*.zip zip
-          ls zip
-          gh release create 1.0${{ GITHUB.RUN_NUMBER }} zip/*.zip --target ${{ GITHUB.SHA }} ${{ GITHUB.RUN_NUMBER }} -t 1.0${{ GITHUB.RUN_NUMBER }}
+        run: gh release create 1.0${{ GITHUB.RUN_NUMBER }} ./artifacts/*.zip --target ${{ GITHUB.SHA }} ${{ GITHUB.RUN_NUMBER }} -t 1.0${{ GITHUB.RUN_NUMBER }}
 
