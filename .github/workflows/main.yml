@@ -76,7 +76,7 @@ jobs:
           name: GhidraOrbis_${{ matrix.ghidra }}_${{ env.SHORT_SHA }}
           path: GhidraOrbis_dist/*
 
-  release:
+  push_release:
     #if: |
       #github.event.action != 'pull_request' &&
       #github.repository == 'astrelsky/GhidraOrbis'
@@ -94,7 +94,6 @@ jobs:
         run: |
           for artifact in artifacts/*; do
             7z a ${artifact}.zip "./${artifact}/*"
-            fi
           done
       - name: Create Release
         env:
