@@ -101,5 +101,5 @@ jobs:
         run: |
           ls artifacts
           ls zip
-          gh release create 1.0${{ GITHUB.RUN_NUMBER }} artifacts/zip/*.zip --target ${{ GITHUB.SHA }} ${{ GITHUB.RUN_NUMBER }} -t 1.0${{ GITHUB.RUN_NUMBER }}
+          gh release create 1.0${{ GITHUB.RUN_NUMBER }} zip/*.zip --target ${{ GITHUB.SHA }} ${{ GITHUB.RUN_NUMBER }} -t 1.0${{ GITHUB.RUN_NUMBER }}
 
