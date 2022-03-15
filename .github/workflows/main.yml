@@ -76,3 +76,23 @@ jobs:
           name: GhidraOrbis_${{ matrix.ghidra }}_${{ env.SHORT_SHA }}
           path: GhidraOrbis_dist/*
 
+  release:
+    if: |
+      github.event.action != 'pull_request' &&
+      github.ref == 'refs/heads/master'     &&
+      github.repository == 'astrelsky/GhidraOrbis'
+    needs: build-windows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: 
+
