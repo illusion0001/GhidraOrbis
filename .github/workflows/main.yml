@@ -55,11 +55,17 @@ jobs:
           name: Ghidra-Cpp-Class-Analyzer_${{ matrix.ghidra }}_${{ env.SHORT_SHA }}
           path: Ghidra-Cpp-Class-Analyzer/dist/bin/*
 
+      - name: Create release tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name != 'pull_request'
+        run: gh release create --target $GITHUB_SHA -t 1.0"${{ GITHUB.RUN_NUMBER }}"
+
       - name: Upload Ghidra-Cpp-Class-Analyzer release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: github.event_name != 'pull_request'
-        run: gh release create 1.0"${{ GITHUB.RUN_NUMBER }}" Ghidra-Cpp-Class-Analyzer/dist/*.zip --target $GITHUB_SHA -t 1.0"${{ GITHUB.RUN_NUMBER }}"
+        run: gh release upload 1.0"${{ GITHUB.RUN_NUMBER }}" Ghidra-Cpp-Class-Analyzer/dist/*.zip
 
       - name: Cleanup
         run: rm -rf Ghidra-Cpp-Class-Analyzer
@@ -82,13 +88,8 @@ jobs:
           path: dist/bin/*
 
       - name: Upload GhidraOrbis Release
-        uses: svenstaro/upload-release-action@1d71c233f746f1dbd928efaf6de63056aa65f6eb
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: github.event_name != 'pull_request'
-        with:
-          release_name: Release - ${{ env.SHORT_SHA }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/*.zip
-          tag: ${{ env.SHORT_SHA }}
-          overwrite: true
-          file_glob: true
+        run: gh release upload 1.0"${{ GITHUB.RUN_NUMBER }}" dist/*.zip
 
