@@ -66,9 +66,8 @@ jobs:
           gradle-version: 6.9
           arguments: buildExtension -PGHIDRA_INSTALL_DIR=${{ env.GHIDRA_INSTALL_DIR }}
 
-      - name: Make artifact single zip 
-        run: |
-          cp dist/*.zip dist-bin
+      - name: Copy artifact
+        run: cp dist/*.zip dist-bin
 
       - name: Upload GhidraOrbis Artifact
         uses: actions/upload-artifact@v3
@@ -89,8 +88,6 @@ jobs:
 
       - name: Download artifacts
         uses: actions/download-artifact@v3
-        with:
-          path: artifacts
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
