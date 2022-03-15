@@ -79,8 +79,8 @@ jobs:
   release:
     if: |
       github.event.action != 'pull_request' &&
-      github.ref == 'refs/heads/master'     &&
       github.repository == 'astrelsky/GhidraOrbis'
+
     needs: build-windows
     runs-on: ubuntu-latest
     steps:
@@ -94,5 +94,5 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: 
+        run: gh release create 1.0"${{ GITHUB.RUN_NUMBER }}" artifacts/*.zip --target $env:GITHUB_SHA -t 1.0"${{ GITHUB.RUN_NUMBER }}"
 
