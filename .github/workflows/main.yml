@@ -45,16 +45,15 @@ jobs:
            mkdir -p ~/.ghidra/.ghidra_${{ matrix.ghidra }}_PUBLIC/Extensions/
            unzip Ghidra-Cpp-Class-Analyzer/dist/*.zip -d ~/.ghidra/.ghidra_${{ matrix.ghidra }}_PUBLIC/Extensions/
 
-      - name: Make artifact single zip 
+      - name: Copy artifact
         run: |
-          mkdir Ghidra-Cpp-Class-Analyzer/dist/bin
-          unzip Ghidra-Cpp-Class-Analyzer/dist/*.zip -d Ghidra-Cpp-Class-Analyzer/dist/bin
+          mkdir dist-bin
+          cp Ghidra-Cpp-Class-Analyzer/dist/*.zip dist-bin
 
       - name: Upload Ghidra-Cpp-Class-Analyzer artifact
         uses: actions/upload-artifact@v3
         with:
-          name: Ghidra-Cpp-Class-Analyzer_${{ matrix.ghidra }}_${{ env.SHORT_SHA }}
-          path: Ghidra-Cpp-Class-Analyzer/dist/bin/*
+          path: dist-bin
           if-no-files-found: error
           retention-days: 14
 
@@ -69,14 +68,13 @@ jobs:
 
       - name: Make artifact single zip 
         run: |
-          mkdir dist/bin
-          unzip dist/*.zip -d dist/bin
+          cp dist/*.zip dist-bin
 
       - name: Upload GhidraOrbis Artifact
         uses: actions/upload-artifact@v3
         with:
           name: GhidraOrbis_${{ matrix.ghidra }}_${{ env.SHORT_SHA }}
-          path: dist/bin/*
+          path: dist-bin
           if-no-files-found: error
           retention-days: 14
 
@@ -93,11 +91,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: artifacts
-      - name: Re-zip artifacts
-        run: |
-          for artifact in artifacts/*; do
-            7z a ${artifact}.zip "./${artifact}/*"
-          done
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
