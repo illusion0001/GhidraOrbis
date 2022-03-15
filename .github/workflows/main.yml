@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Ghidra-Cpp-Class-Analyzer_${{ matrix.ghidra }}_${{ env.SHORT_SHA }}
-          path: Ghidra-Cpp-Class-Analyzer/dist/bin/*
+          path: Ghidra-Cpp-Class-Analyzer_bin/*
 
       - name: Cleanup
         run: |
