@@ -46,8 +46,8 @@ jobs:
 
       - name: Make artifact single zip 
         run: |
-          mkdir Ghidra-Cpp-Class-Analyzer/dist/bin
-          unzip Ghidra-Cpp-Class-Analyzer/dist/*.zip -d Ghidra-Cpp-Class-Analyzer/dist/bin
+          mkdir Ghidra-Cpp-Class-Analyzer_bin
+          unzip Ghidra-Cpp-Class-Analyzer/dist/*.zip -d Ghidra-Cpp-Class-Analyzer_bin
 
       - name: Upload Ghidra-Cpp-Class-Analyzer artifact
         uses: actions/upload-artifact@v3
@@ -57,8 +57,6 @@ jobs:
 
       - name: Cleanup
         run: |
-          mkdir dist
-          cp Ghidra-Cpp-Class-Analyzer/dist/*.zip dist/ 
           rm -rf Ghidra-Cpp-Class-Analyzer
 
       - name: Build GhidraOrbis
@@ -69,13 +67,12 @@ jobs:
 
       - name: Make artifact single zip 
         run: |
-          mkdir dist/bin
-          unzip dist/*.zip -d dist/bin
-          ls dist
+          mkdir GhidraOrbis_dist
+          unzip dist/*.zip -d GhidraOrbis_dist/
 
       - name: Upload GhidraOrbis Artifact
         uses: actions/upload-artifact@v3
         with:
           name: GhidraOrbis_${{ matrix.ghidra }}_${{ env.SHORT_SHA }}
-          path: dist/bin/*
+          path: GhidraOrbis_dist/*
 
