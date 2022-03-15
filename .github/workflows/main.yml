@@ -56,8 +56,7 @@ jobs:
           path: Ghidra-Cpp-Class-Analyzer_bin/*
 
       - name: Cleanup
-        run: |
-          rm -rf Ghidra-Cpp-Class-Analyzer
+        run: rm -rf Ghidra-Cpp-Class-Analyzer
 
       - name: Build GhidraOrbis
         uses: eskatos/gradle-command-action@v2
@@ -93,5 +92,5 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create 1.0"${{ GITHUB.RUN_NUMBER }}" artifacts/*.zip --target $env:GITHUB_SHA -t 1.0"${{ GITHUB.RUN_NUMBER }}"
+        run: gh release create 1.0"${{ GITHUB.RUN_NUMBER }}" artifacts/*.zip --target "${{ GITHUB.SHA }}" "${{ GITHUB.RUN_NUMBER }}" -t 1.0"${{ GITHUB.RUN_NUMBER }}"
 
