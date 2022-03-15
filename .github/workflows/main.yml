@@ -99,7 +99,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ls artifacts
+          ls
           ls zip
           gh release create 1.0${{ GITHUB.RUN_NUMBER }} zip/*.zip --target ${{ GITHUB.SHA }} ${{ GITHUB.RUN_NUMBER }} -t 1.0${{ GITHUB.RUN_NUMBER }}
 
