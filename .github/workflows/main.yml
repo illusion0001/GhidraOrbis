@@ -72,7 +72,6 @@ jobs:
       - name: Upload GhidraOrbis Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: GhidraOrbis_${{ matrix.ghidra }}_${{ env.SHORT_SHA }}
           path: dist-bin
           if-no-files-found: error
           retention-days: 14
