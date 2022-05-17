@@ -1,10 +1,6 @@
 name: Build and publish
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: push
 
 jobs:
   build_extensions:
@@ -81,9 +77,6 @@ jobs:
           retention-days: 14
 
   push_release:
-    if: |
-      github.event_name == 'push' &&
-      github.repository == 'astrelsky/GhidraOrbis'
     needs: build_extensions
     runs-on: ubuntu-latest
     steps:
