@@ -1,17 +1,13 @@
 name: Build and publish
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+on: push
 
 jobs:
   build_extensions:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ghidra: ['10.1.3']
+        ghidra: ['10.1.1', '10.1.2', '10.1.3', '10.1.4']
         gradle-version: ['6.9']
 
     steps:
@@ -64,9 +60,6 @@ jobs:
           retention-days: 14
 
   push_release:
-    if: |
-      github.event_name == 'push' &&
-      github.repository == 'astrelsky/GhidraOrbis'
     needs: build_extensions
     runs-on: ubuntu-latest
     steps:
