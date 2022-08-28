@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ghidra: ['10.1.2', '10.1.5']
-        gradle-version: ['6.9']
+        ghidra: ['10.1.5']
+        gradle-version: ['7.3']
 
     steps:
       - name: Checkout GhidraOrbis
@@ -16,8 +16,8 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: temurin
-          java-version: 11
+          distribution: adopt
+          java-version: 17
       - name: Get short SHA
         run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
       - name: Setup Ghidra
@@ -44,7 +44,7 @@ jobs:
         with:
           path: Ghidra-Cpp-Class-Analyzer/dist/*.zip
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 1
       - name: Cleanup
         run: rm -rf Ghidra-Cpp-Class-Analyzer
       - name: Build GhidraOrbis
@@ -57,7 +57,7 @@ jobs:
         with:
           path: dist/*.zip
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 1
 
   push_release:
     needs: build_extensions
