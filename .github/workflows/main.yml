@@ -41,9 +41,6 @@ jobs:
           if-no-files-found: error
 
   push_release:
-    if: |
-      github.event_name == 'push' &&
-      github.repository == 'astrelsky/GhidraOrbis'
     needs: build_extensions
     runs-on: ubuntu-latest
     steps:
