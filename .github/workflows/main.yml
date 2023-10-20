@@ -27,7 +27,7 @@ jobs:
         run: echo "SHORT_SHA=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
 
       - name: Setup Ghidra
-        uses: er28-0652/setup-ghidra@master
+        uses: illusion0001/setup-ghidra@patch-2
         with:
           version: ${{ matrix.ghidra }}
 
