@@ -39,7 +39,6 @@ jobs:
         with:
           path: dist/*.zip
           if-no-files-found: error
-          retention-days: 14
 
   push_release:
     if: |
@@ -55,4 +54,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create 1.0${{ GITHUB.RUN_NUMBER }} artifact/*.zip --target ${{ GITHUB.SHA }} -t 1.0${{ GITHUB.RUN_NUMBER }}
-
