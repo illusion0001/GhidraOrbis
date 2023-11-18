@@ -37,20 +37,15 @@ jobs:
           gradle-version: 8.3
           arguments: buildExtension -PGHIDRA_INSTALL_DIR=${{ env.GHIDRA_INSTALL_DIR }}
 
-      - name: Copy artifact
-        run: cp dist/*.zip dist-bin
-
       - name: Upload GhidraOrbis Artifact
         uses: actions/upload-artifact@v3
         with:
-          path: dist-bin
+          path: dist/*.zip
           if-no-files-found: error
           retention-days: 14
 
   push_release:
-    if: |
-      github.event_name == 'push' &&
-      github.repository == 'astrelsky/GhidraOrbis'
+    if: true
     needs: build_extensions
     runs-on: ubuntu-latest
     steps:
