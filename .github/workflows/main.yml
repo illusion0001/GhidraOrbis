@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ghidra: ['11.2']
+        ghidra: ['11.1.2', '11.2']
 
     steps:
       - name: Checkout
@@ -43,9 +43,6 @@ jobs:
           if-no-files-found: error
 
   push_release:
-    if: |
-      github.event_name == 'push' &&
-      github.repository == 'astrelsky/GhidraOrbis'
     needs: build_extensions
     runs-on: ubuntu-latest
     steps:
