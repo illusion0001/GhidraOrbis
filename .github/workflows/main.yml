@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ghidra: ['11.1.2', '11.2']
+        ghidra: ['11.1.2', '11.2', '11.2.1']
 
     steps:
       - name: Checkout
@@ -45,6 +45,8 @@ jobs:
   push_release:
     needs: build_extensions
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@main
       - name: Download artifacts
