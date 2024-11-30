@@ -51,6 +51,10 @@ jobs:
       - uses: actions/checkout@main
       - name: Download artifacts
         uses: actions/download-artifact@main
+        with:
+          path: artifact
+          merge-multiple: true
+      - run: ls -R *.zip
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
