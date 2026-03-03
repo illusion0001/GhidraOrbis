@@ -2,9 +2,9 @@ name: Build and publish
 
 on:
   push:
-    branches: [ master ]
+   # branches: [ master ]
   pull_request:
-    branches: [ master ]
+   # branches: [ master ]
 
 jobs:
   build_extensions:
@@ -43,6 +43,8 @@ jobs:
           name: ${{ matrix.ghidra }}
           path: dist/*.zip
           if-no-files-found: error
+          compression-level: 0
+          archive: false
 
   push_release:
     if: github.event_name == 'push'
