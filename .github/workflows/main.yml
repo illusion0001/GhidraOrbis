@@ -44,6 +44,7 @@ jobs:
           path: dist/*.zip
           if-no-files-found: error
           compression-level: 0
+          archive: false
 
   push_release:
     if: github.event_name == 'push'
@@ -55,6 +56,7 @@ jobs:
         uses: actions/download-artifact@main
         with:
           merge-multiple: true
+      - run: ls -R
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
